@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to Go - My Project</title>
+    <style>
+        /* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+    margin: 0;
+    height: 100vh;
+    color: white; /* Text color */
+    overflow: hidden;
+}
+
+/* Wavy background animation */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #1D2D50, #4B0082, #006400, #2F4F4F);
+    background-size: 600% 600%;
+    animation: waveBackground 10s infinite ease-in-out;
+    z-index: -1;
+}
+
+@keyframes waveBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Styling for links */
+a {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    background-color: #1D2D50;
+    color: #FFF;
+}
+
+/* Centering and sizing the logo */
+.logo {
+    display: block;
+    margin: 0 auto; /* Centers the logo */
+    max-width: 300px; /* Increased size */
+    height: auto;
+}
+
+    </style>
+</head>
+<body>
+    <img src="trans logo.png" alt="noob" class="logo" />
+
+    <h1>Where to Go</h1>
+    
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+</body>
+</html>
