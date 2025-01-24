@@ -6,71 +6,84 @@
     <title>About Us - My Project</title>
     <style>
         /* General body styling */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 100px;
-    margin: 0;
-    height: 100vh;
-    color: white; /* Text color */
-    overflow: hidden;
-}
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            margin: 0;
+            height: 100vh;
+            color: white; /* Text color */
+            overflow: hidden;
+        }
 
-/* Wavy background animation */
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(270deg, #1D2D50, #4B0082, #006400, #2F4F4F);
-    background-size: 600% 600%;
-    animation: waveBackground 10s infinite ease-in-out;
-    z-index: -1;
-}
+        /* Wavy background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #1D2D50, #4B0082, #006400, #2F4F4F);
+            background-size: 600% 600%;
+            animation: waveBackground 10s infinite ease-in-out;
+            z-index: -1;
+        }
 
-@keyframes waveBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+        @keyframes waveBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-/* Styling for links */
-a {
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border: 1px solid #FFFFFF;
-    border-radius: 5px;
-    background-color: #1D2D50;
-    color: #FFF;
-}
+        /* Styling for links */
+        a {
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+            background-color: #1D2D50;
+            color: #FFF;
+        }
 
-/* Centering and sizing the logo */
-.logo {
-    display: block;
-    margin: 0 auto; /* Centers the logo */
-    max-width: 300px; /* Increased size */
-    height: auto;
-}
+        /* Centering and sizing the logo */
+        .logo {
+            display: block;
+            margin: 0 auto; /* Centers the logo */
+            max-width: 300px; /* Increased size */
+            height: auto;
+        }
 
+        /* Styling for the paragraph text */
+        p {
+            font-size: 1.2em;
+            margin-top: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
     <img src="trans logo.png" alt="noob" class="logo" />
 
-    <h1>About Us</h1>
+    <h1>About Me</h1>
     <a href="index.html">Home Page</a>
-    <a href="contact.html">Contact Us</a>
+    <a href="contact.html">Contact Me</a>
 
-
-    <p>About our creator</p>
+    <p>
+        Welcome to my project! I’m an individual passionate about technology, creativity, and design, and I’ve built this platform to share my ideas, knowledge, and innovations with the world.
+        This project is a culmination of my passion for tech and my desire to make something useful and inspiring. My aim is to create a space where you can explore, learn, and grow with the resources I’ve crafted.
+        From the very beginning, I’ve worked hard to design this website with care and attention to detail, hoping to make an impact and provide you with valuable tools and inspiration. 
+        Whether you’re looking for new ideas, learning opportunities, or simply a spark of creativity, I hope this website will be a helpful and motivating space for you.
+    </p>
 </body>
 </html>
