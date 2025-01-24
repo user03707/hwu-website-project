@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discounted Games Marketplace</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Set background to black */
+            color: #fff; /* Default text color to white */
+            position: relative; /* Required for the absolute positioning of the ::before pseudo-element */
+        }
+
+        /* Wavy background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #0A1A3D, #6A0DAD, #004B23, #283748, #AD6A0D);
+            background-size: 600% 600%;
+            animation: waveBackground 10s infinite ease-in-out;
+            z-index: -1; /* Place behind other content */
+        }
+
+        @keyframes waveBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .banner {
+            background-color: rgba(76, 175, 80, 0.8);
+            color: rgb(0, 0, 0);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-wheel {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(221, 221, 221, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-wheel a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .genre-wheel a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .games-container {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .games {
+            display: flex;
+            flex-wrap: nowrap; /* Change to nowrap to keep games in a single row */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            padding: 1rem 0;
+        }
+
+        .game-card {
+            background-color: #1E1E1E;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            margin: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 0 0 auto; /* Prevent flex items from growing or shrinking */
+            width: 220px; /* Set a fixed width for each game card */
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-card img {
+            width: 100%; /* Keep this to ensure responsiveness */
+            height: 150px; /* Set a fixed height */
+            object-fit: cover; /* This will ensure the image covers the area without distortion */
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .game-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .details {
+            margin-top: 1rem;
+        }
+
+        .details h2 {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: white; /* Set text color to white */
+        }
+
+        .price-section {
+            margin: 0.5rem 0;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #ffffff;
+        }
+
+        .discounted-price {
+            color: #e60000;
+            font-weight: bold;
+        }
+
+        .buy-now {
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .buy-now:hover {
+            background-color: #45a049;
+        }
+
+        .badge {
+            background-color: #FF0000;
+            color: #FFFFFF;
+            padding: 0.5rem;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="trans logo.png" alt="Your Logo" style="height: 50px; display: inline-block;">
+        <nav>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <h1>Welcome to the Discounted Games Marketplace</h1>
+        <p>Explore top genres like Action, Adventure, RPG, Simulation, Sports, and more!</p>
+    </div>
+
+    <div class="genre-wheel">
+        <a href="#action" class="genre">Action</a>
+        <a href="#adventure" class="genre">Adventure</a>
+        <a href="#rpg" class="genre">RPG</a>
+        <a href="#simulation" class="genre">Simulation</a>
+        <a href="#sports" class="genre">Sports</a>
+        <a href="#strategy" class="genre">Strategy</a>
+        <a href="#indie" class="genre">Indie</a>
+        <a href="#free" class="genre">Free Games</a>
+    </div>
+
+    <section class="games-container">
+        <h2 id="action">Action Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+                <div class="details">
+                    <h2>Cyberpunk 2077</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 249</p>
+                        <p class="discounted-price">AED 124</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1091500/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/782330/header.jpg" alt="Doom Eternal">
+                <div class="details">
+                    <h2>Doom Eternal</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 199</p>
+                        <p class="discounted-price">AED 99</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/782330/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/241930/header.jpg" alt="Middle-earth: Shadow of Mordor">
+                <div class="details">
+                    <h2>Middle-earth: Shadow of Mordor</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 179</p>
+                        <p class="discounted-price">AED 89</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/241930/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/814380/header.jpg" alt="Sekiro: Shadows Die Twice">
+                <div class="details">
+                    <h2>Sekiro: Shadows Die Twice</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 229</p>
+                        <p class="discounted-price">AED 114</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/814380/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="adventure">Adventure Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/750920/header.jpg" alt="Shadow of the Tomb Raider">
+                <div class="details">
+                    <h2>Shadow of the Tomb Raider</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 229</p>
+                        <p class="discounted-price">AED 114</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/750920/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BNTFmN2M0MGMtMTI5Ny00NzRlLWFlZGYtZDM0N2VmOTUwYTdmXkEyXkFqcGc@._V1_.jpg" alt="Uncharted 4: A Thief’s End">
+                <div class="details">
+                    <h2>Uncharted 4: A Thief’s End</h2>
+                    <p>Platform: PlayStation</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://www.playstation.com/en-us/games/uncharted-4/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/812140/header.jpg" alt="Assassin’s Creed Odyssey">
+                <div class="details">
+                    <h2>Assassin’s Creed Odyssey</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/812140/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1151640/header.jpg" alt="Horizon Zero Dawn">
+                <div class="details">
+                    <h2>Horizon Zero Dawn</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 249</p>
+                        <p class="discounted-price">AED 124</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1151640/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="rpg">RPG Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg" alt="The Witcher 3: Wild Hunt">
+                <div class="details">
+                    <h2>The Witcher 3: Wild Hunt</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 299</p>
+                        <p class="discounted-price">AED 149</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/292030/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1222690/header.jpg" alt="Dragon Age Inquisition">
+                <div class="details">
+                    <h2>Dragon Age Inquisition</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/62330/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/637650/header.jpg" alt="Final Fantasy XV">
+                <div class="details">
+                    <h2>Final Fantasy XV</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/582010/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/379430/header.jpg" alt="Kingdom Come: Deliverance">
+                <div class="details">
+                    <h2>Kingdom Come: Deliverance</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 229</p>
+                        <p class="discounted-price">AED 114</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/379430/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="simulation">Simulation Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1222670/header.jpg" alt="The Sims 4">
+                <div class="details">
+                    <h2>The Sims 4</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 199</p>
+                        <p class="discounted-price">AED 99</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1222670/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/255710/header.jpg" alt="Cities: Skylines">
+                <div class="details">
+                    <h2>Cities: Skylines</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 219</p>
+                        <p class="discounted-price">AED 109</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/255710/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/413150/header.jpg" alt="Stardew Valley">
+                <div class="details">
+                    <h2>Stardew Valley</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 129</p>
+                        <p class="discounted-price">AED 64</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/413150/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg" alt="Euro Truck Simulator 2">
+                <div class="details">
+                    <h2>Euro Truck Simulator 2</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 179</p>
+                        <p class="discounted-price">AED 89</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/227300/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="sports">Sports Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1755030/header.jpg" alt="FIFA 23">
+                <div class="details">
+                    <h2>FIFA 23</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 299</p>
+                        <p class="discounted-price">AED 149</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1638840/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1700420/header.jpg" alt="NBA 2K23">
+                <div class="details">
+                    <h2>NBA 2K23</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/829800/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BOTdlOGRiZDAtNGQ0NS00ZmVlLTlmMDUtZmU1NWZmZDkxNTZmXkEyXkFqcGc@._V1_.jpg" alt="eFootball PES 2023">
+                <div class="details">
+                    <h2>eFootball PES 2023</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 229</p>
+                        <p class="discounted-price">AED 114</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1206020/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1464130/header.jpg" alt="Madden NFL 23">
+                <div class="details">
+                    <h2>Madden NFL 23</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/1145820/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="strategy">Strategy Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/779340/header.jpg" alt="Total War: Three Kingdoms">
+                <div class="details">
+                    <h2>Total War: Three Kingdoms</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 279</p>
+                        <p class="discounted-price">AED 139</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/779340/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://image.api.playstation.com/vulcan/img/cfn/11307KFcs3gBlcheONy-ZOYZ5kplFnq5jXinUSI8HkCc8P2gdI1_32JrKJ-vxns32LjXBcQteG2EOwuzWS_KXqE5VCYFmS4Z.png" alt="Civilization VI">
+                <div class="details">
+                    <h2>Civilization VI</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 269</p>
+                        <p class="discounted-price">AED 134</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/289070/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466840/header.jpg" alt="Age of Empires IV">
+                <div class="details">
+                    <h2>Age of Empires IV</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 239</p>
+                        <p class="discounted-price">AED 119</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/813780/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/207610/header.jpg" alt="Starcraft II">
+                <div class="details">
+                    <h2>Starcraft II</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 229</p>
+                        <p class="discounted-price">AED 114</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/811970/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="indie">Indie Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/512900/header.jpg" alt="Streets of Rogue">
+                <div class="details">
+                    <h2>Streets of Rogue</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 129</p>
+                        <p class="discounted-price">AED 64</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/459820/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg" alt="Hollow Knight">
+                <div class="details">
+                    <h2>Hollow Knight</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 159</p>
+                        <p class="discounted-price">AED 79</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/367520/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/588650/header.jpg" alt="Dead Cells">
+                <div class="details">
+                    <h2>Dead Cells</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 149</p>
+                        <p class="discounted-price">AED 74</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/588650/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/311690/header.jpg" alt="Enter the Gungeon">
+                <div class="details">
+                    <h2>Enter the Gungeon</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">AED 149</p>
+                        <p class="discounted-price">AED 74</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/311690/" class="buy-now" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-container">
+        <h2 id="free">Free Games</h2>
+        <div class="games">
+            <div class="game-card">
+                <img src="https://cdn1.epicgames.com/offer/fn/EN_BXECO_33-00_Shooter_EGS_Launcher_Blade_2560x1440_2560x1440-36e1ff15dc00cd506986a2565764bbd3" alt="Fortnite">
+                <div class="details">
+                    <h2>Fortnite</h2>
+                    <p>Platform: Epic Games</p>
+                    <div class="price-section">
+                        <p class="original-price">FREE</p>
+                        <p class="discounted-price">FREE</p>
+                    </div>
+                    <a href="https://www.epicgames.com/store/en-US/p/fortnite" class="buy-now" target="_blank">Download Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg" alt="Dota 2">
+                <div class="details">
+                    <h2>Dota 2</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">FREE</p>
+                        <p class="discounted-price">FREE</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/570/" class="buy-now" target="_blank">Download Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/230410/header.jpg" alt="Warframe">
+                <div class="details">
+                    <h2>Warframe</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">FREE</p>
+                        <p class="discounted-price">FREE</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/230410/" class="buy-now" target="_blank">Download Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/444090/header.jpg" alt="Paladins">
+                <div class="details">
+                    <h2>Paladins</h2>
+                    <p>Platform: Steam</p>
+                    <div class="price-section">
+                        <p class="original-price">FREE</p>
+                        <p class="discounted-price">FREE</p>
+                    </div>
+                    <a href="https://store.steampowered.com/app/444090/" class="buy-now" target="_blank">Download Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Discounted Games Marketplace</p>
+    </footer>
+</body>
+</html>
