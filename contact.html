@@ -6,75 +6,95 @@
     <title>About Us - My Project</title>
     <style>
         /* General body styling */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 100px;
-    margin: 0;
-    height: 100vh;
-    color: white; /* Text color */
-    overflow: hidden;
-}
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            margin: 0;
+            height: 100vh;
+            color: white; /* Text color */
+            overflow: hidden;
+        }
 
-/* Wavy background animation */
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(270deg, #0A1A3D, #6A0DAD, #004B23, #283748, #AD6A0D);
-    background-size: 600% 600%;
-    animation: waveBackground 10s infinite ease-in-out;
-    z-index: -1;
-}
+        /* Wavy background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #0A1A3D, #6A0DAD, #004B23, #283748, #AD6A0D);
+            background-size: 600% 600%;
+            animation: waveBackground 10s infinite ease-in-out;
+            z-index: -1;
+        }
 
-/* Keyframes for the wave animation */
-@keyframes waveBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+        /* Keyframes for the wave animation */
+        @keyframes waveBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
+        /* Styling for links */
+        a {
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+            background-color: #1D2D50;
+            color: #FFF;
+        }
 
-@keyframes waveBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+        /* Centering and sizing the logo */
+        .logo {
+            display: block;
+            margin: 0 auto; /* Centers the logo */
+            max-width: 300px; /* Increased size */
+            height: auto;
+        }
 
-/* Styling for links */
-a {
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border: 1px solid #FFFFFF;
-    border-radius: 5px;
-    background-color: #1D2D50;
-    color: #FFF;
-}
+        /* Form styling */
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* Centering and sizing the logo */
-.logo {
-    display: block;
-    margin: 0 auto; /* Centers the logo */
-    max-width: 300px; /* Increased size */
-    height: auto;
-}
+        input, textarea {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #1D2D50;
+            border-radius: 5px;
+        }
 
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #1D2D50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6A0DAD;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -84,18 +104,40 @@ a {
         <img src="trans logo.png" alt="Logo" class="logo">
         <nav>
             <a href="index.html">Home</a>
-            
-            <a href="about.html">about us</a>
+            <a href="about.html">About Us</a>
         </nav>
     </header>
 
     <main>
         <h1>Contact Us</h1>
         <form id="contactForm" onsubmit="submitContactForm(event)">
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <input type="email" id="email" name="email" placeholder="Your Email" required>
-        <button type="submit">Submit</button>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Submit</button>
+            <div id="validationMessage" class="error-message"></div>
         </form>
-        </main>
+    </main>
+
+    <script>
+        function submitContactForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const validationMessage = document.getElementById('validationMessage');
+
+            // Check if any fields are empty
+            if (!name || !email || !message) {
+                validationMessage.textContent = 'All fields are required!';
+                return false;
+            } else {
+                validationMessage.textContent = ''; // Clear any previous messages
+                // Process form submission here (e.g., send data to a server)
+                alert('Form submitted successfully!');
+            }
+        }
+    </script>
 </body>
 </html>
